@@ -1,0 +1,12 @@
+.nav-link {
+    border-color: rgb(118, 118, 216);
+}
+
+
+.loguot {
+    color: black;
+}
+
+.navbar-brand:hover {
+    background-color: rgb(199, 255, 255);
+}
