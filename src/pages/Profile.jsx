@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from "react";
-
+import React, { useState, useEffect, useContext } from "react";
+import { Navigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
+import state from "../utils/state";
+import { logContext } from "../stateManager";
+
 const Profile = () => {
+    const { logState } = useContext(logContext);
     const [loading, setLoading] = useState(false);
     const [profile, setProfile] = useState({});
-    const [deleted, setDeleted] = useState(false);
 
     const deleteProfile = () => {
         setLoading(true);
@@ -64,6 +67,9 @@ const Profile = () => {
                     Borrar cuenta
                 </button>
             </div>
+            {logState === state.notLogged ? (
+                <Navigate to="/login" replace={true} />
+            ) : null}
         </div>
     );
 };

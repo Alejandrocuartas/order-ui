@@ -11,7 +11,8 @@ const userToken = Cookies.get("userToken");
 
 const Orders = () => {
     const [loading, setLoading] = useState(false);
-    const { socket, setLogState, data, setData } = useContext(logContext);
+    const { socket, setLogState, data, setData, logState } =
+        useContext(logContext);
 
     useEffect(() => {
         setLoading(true);
@@ -44,6 +45,9 @@ const Orders = () => {
                     return <Order key={order._id} order={order} />;
                 })}
             </div>
+            {logState === state.notLogged ? (
+                <Navigate to="/login" replace={true} />
+            ) : null}
         </div>
     );
 };

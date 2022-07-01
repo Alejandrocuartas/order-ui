@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useParams, Navigate, useLocation } from "react-router-dom";
 
+import { logContext } from "../stateManager";
+import stateContext from "../utils/state";
+
 const ProductInfo = () => {
+    const { logState } = useContext(logContext);
     const { id } = useParams();
     const { state } = useLocation();
     const [product, setProduct] = useState(state);
@@ -115,6 +119,9 @@ const ProductInfo = () => {
                 </button>
             </div>
             {deleted ? <Navigate to="/menu"></Navigate> : null}
+            {logState === stateContext.notLogged ? (
+                <Navigate to="/login" replace={true} />
+            ) : null}
         </div>
     );
 };

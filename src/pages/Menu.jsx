@@ -1,12 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
+import { Navigate } from "react-router-dom";
 
 import { logContext } from "../stateManager";
 
+import state from "../utils/state";
 import Product from "../components/Product";
 import PostProduct from "../components/PostProduct";
 
 const Menu = () => {
-    const { products, setProducts } = useContext(logContext);
+    const { products, setProducts, logState } = useContext(logContext);
     const [loading, setLoading] = useState(false);
     const [menu, setMenu] = useState(null);
     const [isOpen, setOpen] = useState(false);
@@ -122,6 +124,9 @@ const Menu = () => {
                     </div>
                 </div>
             )}
+            {logState === state.notLogged ? (
+                <Navigate to="/login" replace={true} />
+            ) : null}
         </div>
     );
 };
