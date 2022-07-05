@@ -30,8 +30,7 @@ const Tables = () => {
         })
             .then((res) => {
                 if (!res.ok) {
-                    alert("No se pudo borrar la mesa.");
-                    location.reload();
+                    throw new Error(res.statusText);
                 }
                 return res.json();
             })
@@ -41,7 +40,8 @@ const Tables = () => {
             })
             .catch((err) => {
                 console.log(err);
-                setLoading(false);
+                alert("No se pudo borrar la mesa.");
+                location.reload();
             });
     };
     useEffect(() => {
@@ -51,7 +51,7 @@ const Tables = () => {
         })
             .then((res) => {
                 if (!res.ok) {
-                    alert("No se pudo conseguir las mesas.");
+                    throw new Error(res.statusText);
                 }
                 return res.json();
             })
@@ -62,6 +62,7 @@ const Tables = () => {
             })
             .catch((err) => {
                 console.log(err);
+                alert("No se pudo conseguir las mesas. Intenta de nuevo");
                 setLoading(false);
             });
     }, []);

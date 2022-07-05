@@ -15,13 +15,24 @@ const PostProduct = ({ isOpen, onClose }) => {
             body: formdata,
             method: "POST",
         })
-            .then((res) => res.json())
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(res.statusText);
+                }
+                return res.json();
+            })
             .then((res) => {
                 setLoading(false);
                 setProducts(res.products);
                 onClose();
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                console.log(err);
+                alert(
+                    "No se pudo guardar el nuevo producto. Intenta de nuevo."
+                );
+                location.reload();
+            });
     };
     if (loading) {
         return (

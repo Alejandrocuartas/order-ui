@@ -31,7 +31,11 @@ const Order = ({ order }) => {
                     setData(res.orders);
                 }
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                console.log(err);
+                alert("No se pudo borrar la orden. Intenta de nuevo.");
+                location.reload();
+            });
         onClose();
     };
     return (

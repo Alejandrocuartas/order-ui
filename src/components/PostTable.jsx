@@ -13,6 +13,9 @@ const PostTable = ({ isOpen, onClose, setTables, company }) => {
             )}`
         )
             .then((res) => {
+                if (!res.ok) {
+                    throw new Error(res.statusText);
+                }
                 return res.blob();
             })
             .then((res) => {
@@ -20,7 +23,9 @@ const PostTable = ({ isOpen, onClose, setTables, company }) => {
             })
             .catch((err) => {
                 console.log(err);
-                alert("Ha ocurrido un error.");
+                alert(
+                    "Ha ocurrido un error al generar el QR. Intenta de nuevo."
+                );
                 location.reload();
             });
 
@@ -29,7 +34,12 @@ const PostTable = ({ isOpen, onClose, setTables, company }) => {
             body: formdata,
             method: "POST",
         })
-            .then((res) => res.json())
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(res.statusText);
+                }
+                return res.json();
+            })
             .then((res) => {
                 setLoading(false);
                 setTables(res.tables);
@@ -37,7 +47,9 @@ const PostTable = ({ isOpen, onClose, setTables, company }) => {
             })
             .catch((err) => {
                 console.log(err);
-                alert("Ha ocurrido un error.");
+                alert(
+                    "Ha ocurrido un error al guardar la información de la mesa. Intenta de nuevo."
+                );
                 location.reload();
             });
     };

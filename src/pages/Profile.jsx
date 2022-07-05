@@ -18,13 +18,16 @@ const Profile = () => {
         })
             .then((res) => {
                 if (!res.ok) {
-                    alert("hubo un error.");
-                    location.reload();
+                    throw new Error(res.statusText);
                 }
                 Cookies.remove("userToken");
                 location.replace("/");
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                console.log(err);
+                alert("hubo un error.");
+                location.reload();
+            });
     };
 
     useEffect(() => {
@@ -34,8 +37,7 @@ const Profile = () => {
         })
             .then((res) => {
                 if (!res.ok) {
-                    alert("hubo un error.");
-                    location.reload();
+                    throw new Error(res.statusText);
                 }
                 return res.json();
             })
@@ -43,7 +45,11 @@ const Profile = () => {
                 setProfile(res.companyData);
                 setLoading(false);
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                console.log(err);
+                alert("hubo un error.");
+                location.reload();
+            });
     }, []);
     if (loading) {
         return (

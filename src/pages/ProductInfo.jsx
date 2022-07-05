@@ -32,15 +32,18 @@ const ProductInfo = () => {
         })
             .then((res) => {
                 if (!res.ok) {
-                    alert(
-                        "No se pudo cambiar el precio del producto. Intenta de nuevo"
-                    );
+                    throw new Error(res.statusText);
                 }
                 setProduct({ ...product, price: newPrice });
                 setLoadingPrice(false);
             })
 
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                console.log(err);
+                alert(
+                    "No se pudo cambiar el precio del producto. Intenta de nuevo"
+                );
+            });
     };
     const deleteProduct = (e) => {
         setLoading(true);
@@ -50,8 +53,7 @@ const ProductInfo = () => {
         })
             .then((res) => {
                 if (!res.ok) {
-                    alert("No se pudo borrar el producto. Intenta de nuevo");
-                    location.reload();
+                    throw new Error(res.statusText);
                 }
                 return res.json();
             })
@@ -59,7 +61,11 @@ const ProductInfo = () => {
                 setLoading(false);
                 setDeleted(true);
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                console.log(err);
+                alert("No se pudo borrar el producto. Intenta de nuevo");
+                location.reload();
+            });
     };
     if (loading) {
         return (

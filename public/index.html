@@ -45,9 +45,14 @@
                     .then((res) => {
                         if (res.ok) {
                             location.replace("/orders");
+                        } else {
+                            alert("Hubo un error en la autenticación.");
                         }
                     })
-                    .catch((err) => console.log(err));
+                    .catch((err) => {
+                        console.log(err);
+                        alert("Hubo un error en la autenticación.");
+                    });
             }
         </script>
     </body>

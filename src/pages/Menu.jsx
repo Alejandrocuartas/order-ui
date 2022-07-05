@@ -24,8 +24,7 @@ const Menu = () => {
         })
             .then((res) => {
                 if (!res.ok) {
-                    alert("No se pudo crear el menú.");
-                    location.reload();
+                    throw new Error(res.statusText);
                 }
                 return res.json();
             })
@@ -35,6 +34,8 @@ const Menu = () => {
             })
             .catch((err) => {
                 console.log(err);
+                alert("Hubo un problema al crear el menú. Intenta de nuevo.");
+                location.reload();
             });
     };
 
@@ -46,14 +47,17 @@ const Menu = () => {
         })
             .then((res) => {
                 if (!res.ok) {
-                    alert("No se pudo borrar el menú.");
-                    location.reload();
+                    throw new Error(res.statusText);
                 }
                 setLoading(false);
                 setProducts([]);
                 setMenu(null);
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                console.log(err);
+                alert("No se pudo borrar el menú.");
+                location.reload();
+            });
     };
 
     useEffect(() => {
