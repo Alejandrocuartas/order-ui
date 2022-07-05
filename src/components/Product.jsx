@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { logContext } from "../stateManager";
 
@@ -7,9 +7,8 @@ import "./styles/Product.css";
 
 import PostProduct from "./PostProduct";
 
-const Product = ({ menu }) => {
+const Product = () => {
     const { products } = useContext(logContext);
-    const [navigate, setNavigate] = useState(false);
     const [isOpen, setOpen] = useState(false);
     const closeModal = () => {
         setOpen(false);
@@ -37,7 +36,11 @@ const Product = ({ menu }) => {
             {products.map((product) => {
                 return (
                     <div key={product._id}>
-                        <div onClick={() => setNavigate(true)}>
+                        <Link
+                            className="link"
+                            to={`/menu/${product._id}`}
+                            state={product}
+                        >
                             <li className="list-group-item d-flex justify-content-between align-items-center">
                                 {product.name}
                                 <span className="badge badge-dark badge-pill">
@@ -46,14 +49,7 @@ const Product = ({ menu }) => {
                                         : "Precio no especificado"}
                                 </span>
                             </li>
-                        </div>
-                        {navigate ? (
-                            <Navigate
-                                to={`/menu/${product._id}`}
-                                replace={false}
-                                state={product}
-                            />
-                        ) : null}
+                        </Link>
                     </div>
                 );
             })}

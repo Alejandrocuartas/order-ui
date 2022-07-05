@@ -62,10 +62,10 @@ const Menu = () => {
             credentials: "include",
         })
             .then((res) => {
-                if (res.ok) {
-                    return res.json();
+                if (!res.ok) {
+                    setMenu(null);
                 }
-                setMenu(null);
+                return res.json();
             })
             .then((res) => {
                 setMenu(res.menu);

@@ -11,6 +11,7 @@ import Profile from "./pages/Profile";
 import Orders from "./pages/Orders";
 import PostOrder from "./pages/PostOrder";
 import ProductInfo from "./pages/ProductInfo";
+import QrImage from "./pages/QrImage";
 
 const App = () => {
     return (
@@ -28,6 +29,10 @@ const App = () => {
                     <Route path="/profile" element={<Profile />}></Route>
                     <Route path="/menu" element={<Menu />}></Route>
                     <Route path="/orders" element={<Orders />}></Route>
+                    <Route
+                        path="/tables/qr/:number"
+                        element={<QrImage />}
+                    ></Route>
                 </Routes>
             </Layout>
         </BrowserRouter>
