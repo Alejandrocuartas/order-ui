@@ -19,7 +19,8 @@ const Orders = () => {
         socket.emit("get-orders", userToken, (response) => {
             if (response.error) {
                 if (response.message === error.notAuthenticated) {
-                    setLogState(state.notLogged);
+                    alert("Primero ingresa.");
+                    Cookies.remove("userToken");
                     location.replace("login");
                 }
             }

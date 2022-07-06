@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 import { logContext } from "../stateManager";
 
@@ -67,7 +68,7 @@ const Menu = () => {
         })
             .then((res) => {
                 if (!res.ok) {
-                    setMenu(null);
+                    throw new Error(res.status);
                 }
                 return res.json();
             })
@@ -77,8 +78,13 @@ const Menu = () => {
                 setLoading(false);
             })
             .catch((err) => {
-                console.log(err);
-                setLoading(false);
+                if (err.message == 401) {
+                    alert("Primero ingresa");
+                    Cookies.remove("userToken");
+                    location.replace("/login");
+                } else {
+                    setLoading(false);
+                }
             });
     }, []);
     if (loading) {

@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Navigate, Link } from "react-router-dom";
+import Cookies from "js-cookie";
 
 import { logContext } from "../stateManager";
 import state from "../utils/state";
@@ -51,7 +52,7 @@ const Tables = () => {
         })
             .then((res) => {
                 if (!res.ok) {
-                    throw new Error(res.statusText);
+                    throw new Error(res.status);
                 }
                 return res.json();
             })
@@ -61,9 +62,14 @@ const Tables = () => {
                 setLoading(false);
             })
             .catch((err) => {
-                console.log(err);
-                alert("No se pudo conseguir las mesas. Intenta de nuevo");
-                setLoading(false);
+                if (err.message == 401) {
+                    alert("Primero ingresa");
+                    Cookies.remove("userToken");
+                    location.replace("/login");
+                } else {
+                    alert("No se pudo conseguir las mesas. Intenta de nuevo");
+                    setLoading(false);
+                }
             });
     }, []);
     if (loading) {

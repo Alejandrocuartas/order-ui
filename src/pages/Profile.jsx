@@ -37,7 +37,7 @@ const Profile = () => {
         })
             .then((res) => {
                 if (!res.ok) {
-                    throw new Error(res.statusText);
+                    throw new Error(res.status);
                 }
                 return res.json();
             })
@@ -46,9 +46,14 @@ const Profile = () => {
                 setLoading(false);
             })
             .catch((err) => {
-                console.log(err);
-                alert("hubo un error.");
-                location.reload();
+                if (err.message == 401) {
+                    alert("primero ingresa.");
+                    Cookies.remove("userToken");
+                    location.replace("/login");
+                } else {
+                    alert("hubo un error.");
+                    location.reload();
+                }
             });
     }, []);
     if (loading) {
