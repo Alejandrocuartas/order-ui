@@ -11,8 +11,7 @@ const userToken = Cookies.get("userToken");
 
 const Orders = () => {
     const [loading, setLoading] = useState(false);
-    const { socket, setLogState, data, setData, logState } =
-        useContext(logContext);
+    const { socket, data, setData, logState } = useContext(logContext);
 
     useEffect(() => {
         setLoading(true);

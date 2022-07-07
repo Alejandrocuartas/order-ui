@@ -14,6 +14,7 @@ const Context = ({ children }) => {
     const [logState, setLogState] = useState(loggState);
     const [data, setData] = useState([]);
     const [products, setProducts] = useState([]);
+    const [client, setClient] = useState([]);
     const defaultContext = {
         logState,
         setLogState: (newState) => {
@@ -27,6 +28,10 @@ const Context = ({ children }) => {
         products,
         setProducts: (newProducts) => {
             setProducts(newProducts);
+        },
+        client,
+        setClient: (clientState) => {
+            setClient(clientState);
         },
     };
 

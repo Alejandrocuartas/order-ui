@@ -5,32 +5,80 @@ import { logContext } from "../stateManager";
 
 import "./styles/PostOrder.css";
 
+import PreOrder from "../components/PreOrder";
+
 const PostOrder = () => {
     const { socket } = useContext(logContext);
     const { companyId, table } = useParams();
     const [menu, setMenu] = useState({ products: [] });
+    const [products, setProducts] = useState([]);
+    const [isOpen, setOpen] = useState(false);
+    const [counter, setCounter] = useState({});
+    const onClose = () => {
+        setOpen(false);
+    };
+
+    const addProduct = (product) => (e) => {
+        if (products.length === 0) {
+            setProducts([
+                {
+                    name: product.name,
+                    amount: 1,
+                    price: product.price,
+                },
+            ]);
+            setCounter({
+                [product.name]: 1,
+            });
+        } else {
+            let currentProducts = products;
+            const names = currentProducts.map((p) => p.name);
+            const index = names.indexOf(product.name);
+            if (index === -1) {
+                currentProducts.push({
+                    name: product.name,
+                    amount: 1,
+                    price: product.price,
+                });
+                setCounter({ ...counter, [product.name]: 1 });
+            } else {
+                currentProducts[index].amount += 1;
+                setCounter({
+                    ...counter,
+                    [product.name]: ++counter[product.name],
+                });
+            }
+            setProducts([...currentProducts]);
+        }
+    };
+
+    const removeProduct = (product) => (e) => {
+        if (products.length > 0) {
+            let currentProducts = products;
+            const names = currentProducts.map((p) => p.name);
+            const index = names.indexOf(product.name);
+            if (index !== -1) {
+                currentProducts[index].amount -= 1;
+                const remainingProducts = currentProducts.filter((p) => {
+                    return p.amount > 0;
+                });
+                setProducts([...remainingProducts]);
+                setCounter({
+                    ...counter,
+                    [product.name]: --counter[product.name],
+                });
+            }
+        }
+    };
 
     const postOrder = async () => {
+        if (products.length <= 0) {
+            return alert("Todavía no has agregado productos.");
+        }
         const order = {
             companyId,
             table,
-            products: [
-                {
-                    name: "papa",
-                    amount: 3,
-                    price: 3000,
-                },
-                {
-                    name: "empanadas",
-                    amount: 2,
-                    price: 1000,
-                },
-                {
-                    name: "limonada",
-                    amount: 2,
-                    price: 1500,
-                },
-            ],
+            products,
         };
         const options = {
             method: "POST",
@@ -58,7 +106,6 @@ const PostOrder = () => {
             })
             .then((res) => {
                 setMenu(res.menu);
-                console.log(res.menu);
             })
             .catch((err) => {
                 alert("Error al conseguir el menú. Intenta de nuevo.");
@@ -77,12 +124,13 @@ const PostOrder = () => {
     }
     return (
         <div className="accordion" id="accordionExample">
+            <hr className="mb-0 mt-0" />
             {menu.products.map((product) => {
                 return (
                     <div key={product._id} className="accordion-item">
-                        <h2 className="accordion-header" id={product._id}>
+                        <h2 className="accordion-header mb-0" id={product._id}>
                             <button
-                                className="accordion-button collapsed btn-primary col-12"
+                                className="accordion-button collapsed btn col-12"
                                 type="button"
                                 data-bs-toggle="collapse"
                                 data-bs-target={`#collapse${product._id}`}
@@ -92,6 +140,7 @@ const PostOrder = () => {
                                 {product.name}
                             </button>
                         </h2>
+                        <hr className="mb-0 mt-0" />
                         <div
                             id={`collapse${product._id}`}
                             className="accordion-collapse collapse"
@@ -103,11 +152,59 @@ const PostOrder = () => {
                                     src={product.image}
                                     alt={`Image of ${product.name}`}
                                 />
+                                <div className="card">
+                                    <ul className="list-group list-group-flush">
+                                        {product.price ? (
+                                            <li className="list-group-item order-li">
+                                                <h6>${product.price}</h6>
+                                            </li>
+                                        ) : null}
+                                        <li className="list-group-item order-li">
+                                            <span
+                                                onClick={removeProduct(product)}
+                                                className="badge badge-pill badge-warning"
+                                            >
+                                                -
+                                            </span>
+                                            <span className="badge badge-pill badge-light">
+                                                {counter[product.name]
+                                                    ? counter[product.name]
+                                                    : 0}
+                                            </span>
+                                            <span
+                                                onClick={addProduct(product)}
+                                                className="badge badge-pill badge-warning"
+                                            >
+                                                +
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
                 );
             })}
+            <h2 className="accordion-header mb-0">
+                <button
+                    className="accordion-button collapsed btn col-12"
+                    type="button"
+                >
+                    {" "}
+                </button>
+            </h2>
+            <button
+                onClick={() => setOpen(true)}
+                className="col-12 fixed-bottom btn btn-primary"
+            >
+                Revisar pedido
+            </button>
+            <PreOrder
+                postOrder={postOrder}
+                onClose={onClose}
+                isOpen={isOpen}
+                products={products}
+            />
         </div>
     );
 };

@@ -1,3 +1,15 @@
 img {
     width: 100%;
 }
+
+.accordion-header:hover {
+    background-color: aliceblue;
+}
+
+.order-li {
+    background-color: rgba(106, 69, 123, 0.858);
+    justify-content: center;
+}
+.order-li:hover{
+    background-color: rgba(106, 69, 123, 0.858);
+}
