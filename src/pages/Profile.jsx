@@ -12,7 +12,7 @@ const Profile = () => {
 
     const deleteProfile = () => {
         setLoading(true);
-        fetch("http://localhost:3000/api/auth/glogin", {
+        fetch("https://order-services-ale.herokuapp.com/api/auth/glogin", {
             method: "DELETE",
             credentials: "include",
         })
@@ -32,7 +32,7 @@ const Profile = () => {
 
     useEffect(() => {
         setLoading(true);
-        fetch("http://localhost:3000/api/auth/profile", {
+        fetch("https://order-services-ale.herokuapp.com/api/auth/profile", {
             credentials: "include",
         })
             .then((res) => {

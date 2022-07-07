@@ -29,7 +29,7 @@ const PostTable = ({ isOpen, onClose, setTables, company }) => {
                 location.reload();
             });
 
-        fetch("http://localhost:3000/api/table", {
+        fetch("https://order-services-ale.herokuapp.com/api/table", {
             credentials: "include",
             body: formdata,
             method: "POST",

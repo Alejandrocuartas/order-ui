@@ -20,7 +20,7 @@ const Context = ({ children }) => {
         setLogState: (newState) => {
             setLogState(newState);
         },
-        socket: io("http://localhost:3000"),
+        socket: io("https://order-services-ale.herokuapp.com"),
         data,
         setData: (newData) => {
             setData(newData);

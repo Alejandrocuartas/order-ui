@@ -21,7 +21,7 @@ const Order = ({ order }) => {
             body: bodyPetition,
             credentials: "include",
         };
-        fetch("http://localhost:3000/api/order", options)
+        fetch("https://order-services-ale.herokuapp.com/api/order", options)
             .then((res) => res.json())
             .then((res) => {
                 if (res.msg === error.notLogged) {

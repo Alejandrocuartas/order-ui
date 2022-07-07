@@ -10,7 +10,7 @@ const PostProduct = ({ isOpen, onClose }) => {
         e.preventDefault();
         const formdata = new FormData(e.target);
         setLoading(true);
-        fetch("http://localhost:3000/api/menu/product", {
+        fetch("https://order-services-ale.herokuapp.com/api/menu/product", {
             credentials: "include",
             body: formdata,
             method: "POST",

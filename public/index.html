@@ -41,7 +41,10 @@
                     body: formdata,
                     credentials: "include",
                 };
-                fetch("http://localhost:3000/api/auth/glogin", options)
+                fetch(
+                    "https://order-services-ale.herokuapp.com/api/auth/glogin",
+                    options
+                )
                     .then((res) => {
                         if (res.ok) {
                             location.replace("/orders");
