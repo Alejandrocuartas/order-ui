@@ -1,0 +1,106 @@
+.nav-link {
+    border-color: rgb(118, 118, 216);
+}
+
+
+.loguot {
+    color: black;
+}
+
+.navbar-brand:hover {
+    background-color: rgb(199, 255, 255);
+}
+.Modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Modal__container {
+    position: relative;
+    top: 10rem;
+    background-color: #ffffff;
+    padding: 1rem;
+    width: 400px;
+}
+
+.Modal__close-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: 0;
+    background-color: #f5f5f5;
+    padding: 0.5rem 1rem;
+}
+
+.Modal__close-button:hover {
+    background-color: rgb(123, 159, 190);
+}
+
+.list-group-item:hover {
+    background-color: rgb(199, 255, 255);
+}
+
+.link {
+    color: black;
+}
+.card-body:hover {
+    background-color: rgb(199, 255, 255);
+}
+img {
+    width: 100%;
+}
+
+.accordion-header:hover {
+    background-color: aliceblue;
+}
+
+.order-li {
+    background-color: rgba(106, 69, 123, 0.858);
+    justify-content: center;
+}
+.order-li:hover{
+    background-color: rgba(106, 69, 123, 0.858);
+}
+.Modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Modal__containerC {
+    position: relative;
+    top: 10rem;
+    background-color: #ffffff;
+    padding: 1rem;
+    width: 100%;
+}
+
+.Modal__close-buttonC {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: 0;
+    background-color: #f5f5f5;
+    padding: 0.5rem 1rem;
+    z-index: 1;
+}
+
+.Modal__close-buttonC:hover {
+    background-color: rgb(123, 159, 190);
+}
+
