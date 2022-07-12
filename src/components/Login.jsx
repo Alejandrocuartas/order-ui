@@ -14,7 +14,7 @@ const Login = () => {
                                 <h3>Entra o regístrate</h3>
                                 <div
                                     id="g_id_onload"
-                                    data-client_id="498602915056-8ia50en8e5q1443qh97qek9puhk964b9.apps.googleusercontent.com"
+                                    data-client_id="833948062282-i27n7ugbijppggel9lp48khr1o5l1c7u.apps.googleusercontent.com"
                                     data-auto_prompt="false"
                                     data-callback="handleCredentialResponse"
                                 ></div>

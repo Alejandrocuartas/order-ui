@@ -32,6 +32,10 @@
             integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
             crossorigin="anonymous"
         ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.js"
+            defer
+        ></script>
         <script>
             function handleCredentialResponse(response) {
                 const formdata = new FormData();
@@ -47,10 +51,17 @@
                 )
                     .then((res) => {
                         if (res.ok) {
-                            location.replace("/orders");
+                            return res.json();
                         } else {
-                            alert("Hubo un error en la autenticación.");
+                            throw new Error(res.status);
                         }
+                    })
+                    .then((res) => {
+                        Cookies.set("userToken", res.userToken, {
+                            expires: 0.5,
+                            secure: true,
+                        });
+                        location.replace("/orders");
                     })
                     .catch((err) => {
                         console.log(err);
