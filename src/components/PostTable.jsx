@@ -8,7 +8,7 @@ const PostTable = ({ isOpen, onClose, setTables, company }) => {
         const formdata = new FormData(e.target);
         setLoading(true);
         await fetch(
-            `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=http://localhost:8080/orders/create/${company}/${formdata.get(
+            `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://ordena.netlify.app/orders/create/${company}/${formdata.get(
                 "number"
             )}`
         )
