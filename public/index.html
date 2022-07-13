@@ -38,11 +38,15 @@
         ></script>
         <script>
             function handleCredentialResponse(response) {
-                const formdata = new FormData();
-                formdata.append("googleToken", response.credential);
+                const body = {
+                    googleToken: response.credential,
+                };
                 const options = {
                     method: "POST",
-                    body: formdata,
+                    body: JSON.stringify(body),
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
                     credentials: "include",
                 };
                 fetch(
