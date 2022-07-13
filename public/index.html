@@ -60,6 +60,8 @@
                         Cookies.set("userToken", res.userToken, {
                             expires: 0.5,
                             secure: true,
+                            sameSite: "none",
+                            path: "/",
                         });
                         location.replace("/orders");
                     })
