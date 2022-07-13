@@ -35,7 +35,9 @@ const Profile = () => {
         fetch("https://order-services-ale.herokuapp.com/api/auth/profile", {
             credentials: "include",
         })
-            .then((res) => {
+            .then(async (res) => {
+                const r = await res.json();
+                console.log(r);
                 if (!res.ok) {
                     throw new Error(res.status);
                 }
