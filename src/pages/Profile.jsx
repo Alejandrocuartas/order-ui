@@ -35,9 +35,7 @@ const Profile = () => {
         fetch("https://order-services-ale.herokuapp.com/api/auth/profile", {
             credentials: "include",
         })
-            .then(async (res) => {
-                const r = await res.json();
-                console.log(r);
+            .then((res) => {
                 if (!res.ok) {
                     throw new Error(res.status);
                 }
@@ -48,6 +46,7 @@ const Profile = () => {
                 setLoading(false);
             })
             .catch((err) => {
+                console.log(err);
                 if (err.message == 401) {
                     alert("primero ingresa.");
                     Cookies.remove("userToken");
