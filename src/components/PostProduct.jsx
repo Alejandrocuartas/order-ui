@@ -54,6 +54,16 @@ const PostProduct = ({ isOpen, onClose }) => {
                     required
                     name="name"
                 />
+                <label className="form-label" htmlFor="description">
+                    Descripción del producto
+                </label>
+                <input
+                    placeholder="Opcional: ingredientes, información adicional del producto."
+                    type="text"
+                    className="form-control"
+                    id="description"
+                    name="description"
+                />
                 <label className="form-label" htmlFor="price">
                     Precio del producto
                 </label>

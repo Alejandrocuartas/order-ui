@@ -90,6 +90,11 @@ const ProductInfo = () => {
             <div className="card-body">
                 <h5 className="card-title">{product.name}</h5>
             </div>
+            {product.description ? (
+                <div className="card-body">
+                    <h6 className="card-title">{product.description}</h6>
+                </div>
+            ) : null}
             <ul className="list-group list-group-flush">
                 <li className="list-group-item">
                     <h5>Precio actual: ${product.price}</h5>

@@ -69,6 +69,10 @@ img {
 .order-li:hover{
     background-color: rgba(106, 69, 123, 0.858);
 }
+
+.price-description{
+    color: white;
+}
 .Modal {
     position: fixed;
     top: 0;
