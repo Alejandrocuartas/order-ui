@@ -157,9 +157,18 @@ const PostOrder = () => {
                                 />
                                 <div className="card">
                                     <ul className="list-group list-group-flush">
+                                        {product.description ? (
+                                            <li className="list-group-item order-li">
+                                                <p className="price-description">
+                                                    {product.description}
+                                                </p>
+                                            </li>
+                                        ) : null}
                                         {product.price ? (
                                             <li className="list-group-item order-li">
-                                                <h6>${product.price}</h6>
+                                                <h6 className="price-description">
+                                                    ${product.price}
+                                                </h6>
                                             </li>
                                         ) : null}
                                         <li className="list-group-item order-li">
