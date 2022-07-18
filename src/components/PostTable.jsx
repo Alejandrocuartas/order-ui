@@ -29,7 +29,7 @@ const PostTable = ({ isOpen, onClose, setTables, company }) => {
                 location.reload();
             });
 
-        fetch("https://order-services-ale.herokuapp.com/api/table", {
+        fetch(`${process.env.API}/api/table`, {
             credentials: "include",
             body: formdata,
             method: "POST",

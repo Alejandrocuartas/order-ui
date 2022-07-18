@@ -87,10 +87,7 @@ const PostOrder = () => {
                 "Content-Type": "application/json",
             },
         };
-        const res = await fetch(
-            "https://order-services-ale.herokuapp.com/api/order",
-            options
-        );
+        const res = await fetch(`${process.env.API}/api/order`, options);
         if (!res.ok) {
             alert("No se pudo crear la orden. Intenta de nuevo.");
             location.reload();
@@ -100,7 +97,7 @@ const PostOrder = () => {
         alert("Orden enviada con éxito.");
     };
     useEffect(() => {
-        fetch(`https://order-services-ale.herokuapp.com/api/menu/${companyId}`)
+        fetch(`${process.env.API}/api/menu/${companyId}`)
             .then((res) => {
                 if (!res.ok) {
                     throw new Error(res.status);

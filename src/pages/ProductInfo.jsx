@@ -22,17 +22,14 @@ const ProductInfo = () => {
             newPrice,
         };
         setLoadingPrice(true);
-        fetch(
-            "https://order-services-ale.herokuapp.com/api/menu/product/" + id,
-            {
-                method: "PATCH",
-                credentials: "include",
-                body: JSON.stringify(body),
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            }
-        )
+        fetch(`${process.env.API}/api/menu/product/${id}`, {
+            method: "PATCH",
+            credentials: "include",
+            body: JSON.stringify(body),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
             .then((res) => {
                 if (!res.ok) {
                     throw new Error(res.statusText);
@@ -50,13 +47,10 @@ const ProductInfo = () => {
     };
     const deleteProduct = (e) => {
         setLoading(true);
-        fetch(
-            "https://order-services-ale.herokuapp.com/api/menu/product/" + id,
-            {
-                method: "DELETE",
-                credentials: "include",
-            }
-        )
+        fetch(`${process.env.API}/api/menu/product/${id}`, {
+            method: "DELETE",
+            credentials: "include",
+        })
             .then((res) => {
                 if (!res.ok) {
                     throw new Error(res.statusText);

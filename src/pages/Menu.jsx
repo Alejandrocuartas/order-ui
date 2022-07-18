@@ -19,7 +19,7 @@ const Menu = () => {
 
     const createMenu = () => {
         setLoading(true);
-        fetch("https://order-services-ale.herokuapp.com/api/menu", {
+        fetch(`${process.env.API}/api/menu`, {
             credentials: "include",
             method: "POST",
         })
@@ -42,7 +42,7 @@ const Menu = () => {
 
     const deleteMenu = () => {
         setLoading(true);
-        fetch("https://order-services-ale.herokuapp.com/api/menu", {
+        fetch(`${process.env.API}/api/menu`, {
             method: "DELETE",
             credentials: "include",
         })
@@ -63,7 +63,7 @@ const Menu = () => {
 
     useEffect(() => {
         setLoading(true);
-        fetch("https://order-services-ale.herokuapp.com/api/menu", {
+        fetch(`${process.env.API}/api/menu`, {
             credentials: "include",
         })
             .then((res) => {

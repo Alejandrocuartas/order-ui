@@ -10,7 +10,7 @@ const PostProduct = ({ isOpen, onClose }) => {
         e.preventDefault();
         const formdata = new FormData(e.target);
         setLoading(true);
-        fetch("https://order-services-ale.herokuapp.com/api/menu/product", {
+        fetch(`${process.env.API}/api/menu/product`, {
             credentials: "include",
             body: formdata,
             method: "POST",
@@ -74,7 +74,7 @@ const PostProduct = ({ isOpen, onClose }) => {
                     id="price"
                 />
                 <label className="form-label" htmlFor="file">
-                    Default file input example
+                    Imagen del producto
                 </label>
                 <input
                     name="productImage"

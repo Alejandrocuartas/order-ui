@@ -49,10 +49,7 @@
                     },
                     credentials: "include",
                 };
-                fetch(
-                    "https://order-services-ale.herokuapp.com/api/auth/glogin",
-                    options
-                )
+                fetch(API + "/api/auth/glogin", options)
                     .then((res) => {
                         if (res.ok) {
                             return res.json();

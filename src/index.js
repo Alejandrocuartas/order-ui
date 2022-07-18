@@ -2,11 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import App from "./App";
-import { Context } from './stateManager'
+import { Context } from "./stateManager";
+
+window.API = process.env.API;
 
 ReactDOM.render(
     <Context>
-        <App/>
+        <App />
     </Context>,
-    document.getElementById('root')
-)
+    document.getElementById("root")
+);

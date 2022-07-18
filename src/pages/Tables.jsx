@@ -21,7 +21,7 @@ const Tables = () => {
         const body = {
             number,
         };
-        fetch("https://order-services-ale.herokuapp.com/api/table", {
+        fetch(`${process.env.API}/api/table`, {
             method: "DELETE",
             credentials: "include",
             headers: {
@@ -47,7 +47,7 @@ const Tables = () => {
     };
     useEffect(() => {
         setLoading(true);
-        fetch("https://order-services-ale.herokuapp.com/api/table", {
+        fetch(`${process.env.API}/api/table`, {
             credentials: "include",
         })
             .then((res) => {
