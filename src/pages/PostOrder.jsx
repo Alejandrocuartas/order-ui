@@ -14,6 +14,7 @@ const PostOrder = () => {
     const [products, setProducts] = useState([]);
     const [isOpen, setOpen] = useState(false);
     const [counter, setCounter] = useState({});
+    const [petition, setPetition] = useState("");
     const onClose = () => {
         setOpen(false);
     };
@@ -79,6 +80,7 @@ const PostOrder = () => {
             companyId,
             table,
             products,
+            petition,
         };
         const options = {
             method: "POST",
@@ -211,6 +213,8 @@ const PostOrder = () => {
                 Revisar pedido
             </button>
             <PreOrder
+                setPetition={setPetition}
+                petition={petition}
                 postOrder={postOrder}
                 onClose={onClose}
                 isOpen={isOpen}

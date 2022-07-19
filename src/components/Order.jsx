@@ -51,6 +51,7 @@ const Order = ({ order }) => {
                 <OrderInfo
                     products={order.products}
                     price={order.price}
+                    petition={order.petition}
                     isOpen={isOpen}
                     onClose={onClose}
                     onPay={onPay}

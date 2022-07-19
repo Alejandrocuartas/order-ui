@@ -1,7 +1,14 @@
 import React from "react";
 import ModalClient from "./ModalClient";
 
-const PreOrder = ({ isOpen, onClose, products, postOrder }) => {
+const PreOrder = ({
+    isOpen,
+    onClose,
+    products,
+    postOrder,
+    setPetition,
+    petition,
+}) => {
     if (products.length === 0) {
         return (
             <ModalClient isOpen={isOpen} onClose={onClose}>
@@ -27,6 +34,14 @@ const PreOrder = ({ isOpen, onClose, products, postOrder }) => {
                         );
                     })}
                 </ul>
+                <li className="list-group list-group-flush">
+                    <input
+                        onChange={(e) => setPetition(e.target.value)}
+                        value={petition}
+                        type="text"
+                        placeholder="Alguna petición especial?"
+                    />
+                </li>
                 <button className="btn btn-primary" onClick={postOrder}>
                     Enviar pedido
                 </button>
