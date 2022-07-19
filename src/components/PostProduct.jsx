@@ -74,7 +74,7 @@ const PostProduct = ({ isOpen, onClose }) => {
                     id="price"
                 />
                 <label className="form-label" htmlFor="file">
-                    Imagen del producto
+                    Opcional: imagen del producto
                 </label>
                 <input
                     name="productImage"
@@ -82,7 +82,6 @@ const PostProduct = ({ isOpen, onClose }) => {
                     className="form-control mb-3"
                     id="file"
                     accept="image/x-png,image/gif,image/jpeg"
-                    required
                 />
                 <input className="form-control btn btn-primary" type="submit" />
             </form>

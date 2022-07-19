@@ -148,10 +148,12 @@ const PostOrder = () => {
                             data-bs-parent="#accordionExample"
                         >
                             <div className="accordion-body">
-                                <img
-                                    src={product.image}
-                                    alt={`Image of ${product.name}`}
-                                />
+                                {product.image ? (
+                                    <img
+                                        src={product.image}
+                                        alt={`Image of ${product.name}`}
+                                    />
+                                ) : null}
                                 <div className="card">
                                     <ul className="list-group list-group-flush">
                                         {product.description ? (
