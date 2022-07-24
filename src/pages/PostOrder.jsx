@@ -206,12 +206,14 @@ const PostOrder = () => {
                     {" "}
                 </button>
             </h2>
-            <button
-                onClick={() => setOpen(true)}
-                className="col-12 fixed-bottom btn btn-primary"
-            >
-                Revisar pedido
-            </button>
+            {!isOpen ? (
+                <button
+                    onClick={() => setOpen(true)}
+                    className="col-12 fixed-bottom btn btn-primary"
+                >
+                    Revisar pedido
+                </button>
+            ) : null}
             <PreOrder
                 setPetition={setPetition}
                 petition={petition}

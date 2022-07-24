@@ -33,15 +33,15 @@ const PreOrder = ({
                             </li>
                         );
                     })}
+                    <li className="list-group list-group-flush">
+                        <input
+                            onChange={(e) => setPetition(e.target.value)}
+                            value={petition}
+                            type="text"
+                            placeholder="Alguna petición especial?"
+                        />
+                    </li>
                 </ul>
-                <li className="list-group list-group-flush">
-                    <input
-                        onChange={(e) => setPetition(e.target.value)}
-                        value={petition}
-                        type="text"
-                        placeholder="Alguna petición especial?"
-                    />
-                </li>
                 <button className="btn btn-primary" onClick={postOrder}>
                     Enviar pedido
                 </button>
