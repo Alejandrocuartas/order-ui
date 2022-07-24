@@ -9,10 +9,23 @@ import error from "../utils/error";
 
 const userToken = Cookies.get("userToken");
 
+const notificationManager = async () => {
+    if ("Notification" in window) {
+        if (window.Notification.permission === "default") {
+            return await window.Notification.requestPermission();
+        }
+        if (window.Notification.permission === "granted") {
+            return;
+        }
+    } else {
+        alert("Tu navegador no soporta notificaciones.");
+    }
+};
+
 const Orders = () => {
     const [loading, setLoading] = useState(false);
     const { socket, data, setData, logState } = useContext(logContext);
-
+    notificationManager();
     useEffect(() => {
         setLoading(true);
         socket.emit("get-orders", userToken, (response) => {
@@ -28,6 +41,9 @@ const Orders = () => {
         });
         socket.on("new-orders", (orders) => {
             setData(orders);
+            if (window.Notification.permission === "granted") {
+                new window.Notification("Tienes un nuevo pedido.");
+            }
         });
     }, []);
     if (loading) {
