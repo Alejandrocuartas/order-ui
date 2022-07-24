@@ -1,6 +1,8 @@
 import React from "react";
 import ModalClient from "./ModalClient";
 
+import "./styles/PreOrder.css";
+
 const PreOrder = ({
     isOpen,
     onClose,
@@ -24,8 +26,8 @@ const PreOrder = ({
     }
     return (
         <ModalClient isOpen={isOpen} onClose={onClose}>
-            <div className="card">
-                <ul className="list-group list-group-flush">
+            <div className="card products-card">
+                <ul className="list-group list-group-flush list-products">
                     {products.map((product) => {
                         return (
                             <li key={product.name} className="list-group-item">

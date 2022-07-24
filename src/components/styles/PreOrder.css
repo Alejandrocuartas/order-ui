@@ -1,0 +1,8 @@
+.products-card {
+    max-height: 100%;
+}
+
+.list-products {
+    max-height: 100%;
+    overflow-y: scroll;
+}
