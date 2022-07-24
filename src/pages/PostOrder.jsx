@@ -96,7 +96,11 @@ const PostOrder = () => {
         }
         const response = await res.json();
         socket.emit("new-order", response.orders);
-        alert("Orden enviada con éxito.");
+        alert(
+            "Orden enviada con éxito. En un momento llegará su pedido. \nA continuación le pedimos llenar una corta encuesta para valorar la experiencia."
+        );
+        location.href =
+            "https://docs.google.com/forms/d/e/1FAIpQLSeBP562eJl14MO7jiQ4dEYJG01a82FBNsgjWxKlTVKCVkinAQ/viewform?vc=0&c=0&w=1&flr=0&usp=mail_form_link";
     };
     useEffect(() => {
         fetch(`${process.env.API}/api/menu/${companyId}`)
