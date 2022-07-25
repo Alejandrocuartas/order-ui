@@ -5,8 +5,8 @@ import Order from "./Order";
 const OrderInfo = ({ isOpen, onClose, products, price, onPay, petition }) => {
     return (
         <Modal isOpen={isOpen} onClose={onClose}>
-            <div className="card" style={{ width: "22rem" }}>
-                <ul className="list-group list-group-flush">
+            <div className="card products-card" style={{ width: "22rem" }}>
+                <ul className="list-group list-group-flush list-products">
                     {products.map((product) => {
                         return (
                             <li key={product._id} className="list-group-item">

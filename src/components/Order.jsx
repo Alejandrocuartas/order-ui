@@ -13,6 +13,27 @@ const Order = ({ order }) => {
     const onClose = () => {
         setOpen(false);
     };
+    const onRead = () => {
+        setOpen(true);
+        fetch(`${process.env.API}/api/order`, {
+            method: "PATCH",
+            credentials: "include",
+            body: JSON.stringify({ orderId: order._id }),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(res.statusText);
+                }
+                order.received = true;
+            })
+
+            .catch((err) => {
+                console.log(err);
+            });
+    };
     const onPay = () => {
         const bodyPetition = new FormData();
         bodyPetition.append("orderId", order._id);
@@ -41,13 +62,24 @@ const Order = ({ order }) => {
     return (
         <div className="col mb-2">
             <div className="card">
-                <div
-                    onClick={() => setOpen(true)}
-                    className="card-body"
-                    style={{ height: "110px" }}
-                >
-                    <h5 className="card-title">Mesa: {order.table}</h5>
-                </div>
+                {order.received ? (
+                    <div
+                        onClick={() => setOpen(true)}
+                        className="card-body"
+                        style={{ height: "110px" }}
+                    >
+                        <h5 className="card-title">Mesa: {order.table}</h5>
+                    </div>
+                ) : (
+                    <div
+                        onClick={onRead}
+                        className="card-body"
+                        style={{ height: "110px", backgroundColor: "red" }}
+                    >
+                        <h5 className="card-title">Mesa: {order.table}</h5>
+                    </div>
+                )}
+
                 <OrderInfo
                     products={order.products}
                     price={order.price}

@@ -13,10 +13,11 @@
 
 .Modal__container {
     position: relative;
-    top: 10rem;
+    top: 10%;
     background-color: #ffffff;
     padding: 1rem;
     width: 400px;
+    max-height: 80%;
 }
 
 .Modal__close-button {
