@@ -13,6 +13,7 @@ if (userToken) {
 const Context = ({ children }) => {
     const [logState, setLogState] = useState(loggState);
     const [data, setData] = useState([]);
+    const [dataDel, setDataDel] = useState([]);
     const [products, setProducts] = useState([]);
     const [client, setClient] = useState([]);
     const defaultContext = {
@@ -32,6 +33,10 @@ const Context = ({ children }) => {
         client,
         setClient: (clientState) => {
             setClient(clientState);
+        },
+        dataDel,
+        setDataDel: (newData) => {
+            setDataDel(newData);
         },
     };
 

@@ -12,6 +12,8 @@ import Orders from "./pages/Orders";
 import PostOrder from "./pages/PostOrder";
 import ProductInfo from "./pages/ProductInfo";
 import QrImage from "./pages/QrImage";
+import Deliveries from "./pages/Deliveries";
+import PostDelivery from "./pages/PostDelivery";
 
 const App = () => {
     return (
@@ -24,11 +26,16 @@ const App = () => {
                         path="/orders/create/:companyId/:table"
                         element={<PostOrder />}
                     ></Route>
+                    <Route
+                        path="/orders/create/:companyId/delivery"
+                        element={<PostDelivery />}
+                    ></Route>
                     <Route path="/tables" element={<Tables />}></Route>
                     <Route path="/menu/:id" element={<ProductInfo />}></Route>
                     <Route path="/profile" element={<Profile />}></Route>
                     <Route path="/menu" element={<Menu />}></Route>
                     <Route path="/orders" element={<Orders />}></Route>
+                    <Route path="/deliveries" element={<Deliveries />}></Route>
                     <Route
                         path="/tables/qr/:number"
                         element={<QrImage />}

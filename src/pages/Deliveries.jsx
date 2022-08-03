@@ -9,26 +9,12 @@ import error from "../utils/error";
 
 const userToken = Cookies.get("userToken");
 
-const notificationManager = async () => {
-    if ("Notification" in window) {
-        if (window.Notification.permission === "default") {
-            return await window.Notification.requestPermission();
-        }
-        if (window.Notification.permission === "granted") {
-            return;
-        }
-    } else {
-        alert("Tu navegador no soporta notificaciones.");
-    }
-};
-
 const Orders = () => {
     const [loading, setLoading] = useState(false);
-    const { socket, data, setData, logState } = useContext(logContext);
+    const { socket, dataDel, setDataDel, logState } = useContext(logContext);
     useEffect(() => {
-        notificationManager();
         setLoading(true);
-        socket.emit("get-orders", userToken, (response) => {
+        socket.emit("get-deliveries", userToken, (response) => {
             if (response.error) {
                 if (response.message === error.notAuthenticated) {
                     alert("Primero ingresa.");
@@ -36,13 +22,13 @@ const Orders = () => {
                     location.replace("login");
                 }
             }
-            setData(response.orders);
+            setDataDel(response.orders);
             setLoading(false);
         });
-        socket.on("new-orders", (orders) => {
-            setData(orders);
+        socket.on("new-deliveries", (orders) => {
+            setDataDel(orders);
             if (window.Notification.permission === "granted") {
-                new window.Notification("Tienes un nuevo pedido.");
+                new window.Notification("Tienes un nuevo pedido a domicilio.");
             }
         });
     }, []);
@@ -53,12 +39,18 @@ const Orders = () => {
             </div>
         );
     }
-    if (data.length === 0) return <h1>Sin órdenes</h1>;
+    if (dataDel.length === 0) return <h1>Sin pedidos a domicilio</h1>;
     return (
         <div className="container container-fluid">
             <div className="row">
-                {data.map((order) => {
-                    return <Order key={order._id} order={order} />;
+                {dataDel.map((order) => {
+                    return (
+                        <Order
+                            key={order._id}
+                            order={order}
+                            isDelivery={true}
+                        />
+                    );
                 })}
             </div>
             {logState === state.notLogged ? (

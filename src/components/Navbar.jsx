@@ -71,6 +71,15 @@ const Navbar = () => {
                                         Órdenes
                                     </Link>
                                 </li>
+                                <li className="nav-item">
+                                    <Link
+                                        className="nav-link active"
+                                        aria-current="page"
+                                        to="/deliveries"
+                                    >
+                                        Domicilios
+                                    </Link>
+                                </li>
                             </ul>
                         </div>
                         <Link

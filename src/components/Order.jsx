@@ -7,7 +7,7 @@ import OrderInfo from "./OrderInfo";
 
 import "./styles/Order.css";
 
-const Order = ({ order }) => {
+const Order = ({ order, isDelivery }) => {
     const { setData } = useContext(logContext);
     const [isOpen, setOpen] = useState(false);
     const onClose = () => {
@@ -68,7 +68,11 @@ const Order = ({ order }) => {
                         className="card-body"
                         style={{ height: "110px" }}
                     >
-                        <h5 className="card-title">Mesa: {order.table}</h5>
+                        <h5 className="card-title">
+                            {isDelivery
+                                ? `Teléfono: ${order.phone}`
+                                : `Mesa: ${order.table}`}
+                        </h5>
                     </div>
                 ) : (
                     <div
@@ -76,13 +80,19 @@ const Order = ({ order }) => {
                         className="card-body"
                         style={{ height: "110px", backgroundColor: "red" }}
                     >
-                        <h5 className="card-title">Mesa: {order.table}</h5>
+                        <h5 className="card-title">
+                            {isDelivery
+                                ? `Teléfono: ${order.phone}`
+                                : `Mesa: ${order.table}`}
+                        </h5>
                     </div>
                 )}
 
                 <OrderInfo
                     products={order.products}
                     price={order.price}
+                    phone={order.phone}
+                    adress={order.adress}
                     petition={order.petition}
                     isOpen={isOpen}
                     onClose={onClose}

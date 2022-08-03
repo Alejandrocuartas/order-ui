@@ -5,15 +5,17 @@ import { logContext } from "../stateManager";
 
 import "./styles/PostOrder.css";
 
-import PreOrder from "../components/PreOrder";
+import PreDelivery from "../components/PreDelivery";
 
-const PostOrder = () => {
+const PostDelivery = () => {
     const { socket } = useContext(logContext);
-    const { companyId, table } = useParams();
+    const { companyId } = useParams();
     const [menu, setMenu] = useState({ products: [] });
     const [products, setProducts] = useState([]);
     const [isOpen, setOpen] = useState(false);
     const [counter, setCounter] = useState({});
+    const [phone, setPhone] = useState("");
+    const [adress, setAdress] = useState("");
     const [petition, setPetition] = useState("");
     const [loading, setLoading] = useState(false);
     const onClose = () => {
@@ -77,14 +79,23 @@ const PostOrder = () => {
         if (loading) {
             return;
         }
+        if (!phone) {
+            return alert("Debes agregar el teléfono.");
+        }
+        if (!adress) {
+            return alert("Debes agregar la dirección.");
+        }
         setLoading(true);
         if (products.length <= 0) {
             return alert("Todavía no has agregado productos.");
         }
         const order = {
             companyId,
-            table,
+            table: 0,
             products,
+            isDelivery: true,
+            phone,
+            adress,
             petition,
         };
         const options = {
@@ -101,7 +112,7 @@ const PostOrder = () => {
         }
         const response = await res.json();
         setLoading(false);
-        socket.emit("new-order", response.orders);
+        socket.emit("new-delivery", response.orders);
         alert(
             "Orden enviada con éxito. En un momento llegará su pedido. \nA continuación le pedimos llenar una corta encuesta para valorar la experiencia."
         );
@@ -224,9 +235,13 @@ const PostOrder = () => {
                     Revisar pedido
                 </button>
             ) : null}
-            <PreOrder
-                setPetition={setPetition}
+            <PreDelivery
+                setPhone={setPhone}
+                phone={phone}
+                setAdress={setAdress}
+                adress={adress}
                 petition={petition}
+                setPetition={setPetition}
                 postOrder={postOrder}
                 onClose={onClose}
                 isOpen={isOpen}
@@ -236,4 +251,4 @@ const PostOrder = () => {
     );
 };
 
-export default PostOrder;
+export default PostDelivery;
