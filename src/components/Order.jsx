@@ -8,7 +8,7 @@ import OrderInfo from "./OrderInfo";
 import "./styles/Order.css";
 
 const Order = ({ order, isDelivery }) => {
-    const { setData } = useContext(logContext);
+    const { setData, setDataDel } = useContext(logContext);
     const [isOpen, setOpen] = useState(false);
     const onClose = () => {
         setOpen(false);
@@ -49,7 +49,12 @@ const Order = ({ order, isDelivery }) => {
                     alert("No tiene sesión iniciada.");
                     location.reload();
                 } else {
-                    setData(res.orders);
+                    if (isDelivery) {
+                        setDataDel(res.orders);
+                    }
+                    if (!isDelivery) {
+                        setData(res.orders);
+                    }
                 }
             })
             .catch((err) => {

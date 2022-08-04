@@ -27,7 +27,7 @@ const App = () => {
                         element={<PostOrder />}
                     ></Route>
                     <Route
-                        path="/orders/create/:companyId/delivery"
+                        path="/orders/create/delivery/:companyId"
                         element={<PostDelivery />}
                     ></Route>
                     <Route path="/tables" element={<Tables />}></Route>
