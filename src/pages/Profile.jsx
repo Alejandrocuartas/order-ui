@@ -9,6 +9,7 @@ const Profile = () => {
     const { logState } = useContext(logContext);
     const [loading, setLoading] = useState(false);
     const [profile, setProfile] = useState({});
+    const [qr, setQr] = useState("");
 
     const deleteProfile = () => {
         setLoading(true);
@@ -42,6 +43,19 @@ const Profile = () => {
                 return res.json();
             })
             .then((res) => {
+                fetch(
+                    `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${process.env.API}/orders/create/delivery/${res.companyData._id}`
+                )
+                    .then((res) => {
+                        if (!res.ok) {
+                            throw new Error(res.status);
+                        }
+                        return res.blob();
+                    })
+                    .then((res) => {
+                        setQr(window.URL.createObjectURL(res));
+                    })
+                    .catch((err) => console.log(err));
                 setProfile(res.companyData);
                 setLoading(false);
             })
@@ -72,6 +86,22 @@ const Profile = () => {
             <ul className="list-group list-group-flush">
                 <li className="list-group-item">
                     <h5>{profile.email}</h5>
+                </li>
+                <li className="list-group-item">
+                    <h5>QR del menú para domicilios y el link:</h5>
+                    <hr />
+                    <img
+                        style={{ height: "200px", width: "200px" }}
+                        src={qr}
+                        alt="QR of the delivery menu"
+                    />
+                </li>
+                <li className="list-group-item">
+                    <a
+                        href={`${process.env.API}/orders/create/delivery/${profile._id}`}
+                    >
+                        {`${process.env.API}/orders/create/delivery/${profile._id}`}
+                    </a>
                 </li>
             </ul>
             <div className="card-body">
