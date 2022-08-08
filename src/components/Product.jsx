@@ -48,6 +48,15 @@ const Product = () => {
                                         ? "$" + product.price
                                         : "Precio no especificado"}
                                 </span>
+                                {product.available ? (
+                                    <span className="badge badge-primary badge-pill">
+                                        Disponible
+                                    </span>
+                                ) : (
+                                    <span className="badge badge-secondary badge-pill">
+                                        No disponible
+                                    </span>
+                                )}
                             </li>
                         </Link>
                     </div>

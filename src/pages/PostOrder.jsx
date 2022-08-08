@@ -21,6 +21,9 @@ const PostOrder = () => {
     };
 
     const addProduct = (product) => (e) => {
+        if (!product.available) {
+            return alert("Este producto está agotado hoy.");
+        }
         if (products.length === 0) {
             setProducts([
                 {
@@ -97,7 +100,7 @@ const PostOrder = () => {
         const res = await fetch(`${process.env.API}/api/order`, options);
         if (!res.ok) {
             alert("No se pudo crear la orden. Intenta de nuevo.");
-            location.reload();
+            return location.reload();
         }
         const response = await res.json();
         setLoading(false);
@@ -138,8 +141,18 @@ const PostOrder = () => {
         <div className="accordion" id="accordionExample">
             <hr className="mb-0 mt-0" />
             {menu.products.map((product) => {
+                let color;
+                if (product.available) {
+                    color = "white";
+                } else {
+                    color = "#E0E0E0";
+                }
                 return (
-                    <div key={product._id} className="accordion-item">
+                    <div
+                        style={{ backgroundColor: color }}
+                        key={product._id}
+                        className="accordion-item"
+                    >
                         <h2 className="accordion-header mb-0" id={product._id}>
                             <button
                                 className="accordion-button collapsed btn col-12"

@@ -7,13 +7,32 @@ import stateContext from "../utils/state";
 const ProductInfo = () => {
     const { logState } = useContext(logContext);
     const { id } = useParams();
-    const { state } = useLocation();
-    const [product, setProduct] = useState(state);
+    const d = useLocation();
+    const [product, setProduct] = useState(d.state);
+    console.log(d);
     const [deleted, setDeleted] = useState(false);
     const [newPrice, setNewPrice] = useState();
     const [loading, setLoading] = useState(false);
     const [loadingPrice, setLoadingPrice] = useState(false);
-
+    const changeAvailabilityProduct = (e) => {
+        fetch(`${process.env.API}/api/menu/product/status/${product._id}`, {
+            method: "PATCH",
+            credentials: "include",
+        })
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(res.statusText);
+                }
+                setProduct({ ...product, available: e.target.checked });
+            })
+            .catch((err) => {
+                console.log(err);
+                alert(
+                    "No se pudo cambiar el estado del producto. Intenta de nuevo"
+                );
+                location.reload();
+            });
+    };
     const handleInput = (e) => {
         setNewPrice(Number(e.target.value));
     };
@@ -78,6 +97,7 @@ const ProductInfo = () => {
         <div className="card">
             {product.image ? (
                 <img
+                    style={{ maxWidth: "400px" }}
                     src={product.image}
                     className="card-img-top"
                     alt={`Imagen de ${product.name}`}
@@ -87,11 +107,44 @@ const ProductInfo = () => {
                 <h5 className="card-title">{product.name}</h5>
             </div>
             {product.description ? (
-                <div className="card-body">
-                    <h6 className="card-title">{product.description}</h6>
-                </div>
+                <React.Fragment>
+                    <hr />
+                    <div className="card-body">
+                        <h6 className="card-title">{product.description}</h6>
+                    </div>
+                </React.Fragment>
             ) : null}
             <ul className="list-group list-group-flush">
+                <li className="list-group-item">
+                    <h5>Disponibilidad:</h5>
+                    <div className="form-check">
+                        {product.available ? (
+                            <input
+                                className="form-check-input"
+                                type="checkbox"
+                                value=""
+                                id="flexCheckDefault"
+                                defaultChecked
+                                onClick={changeAvailabilityProduct}
+                            />
+                        ) : (
+                            <input
+                                className="form-check-input"
+                                type="checkbox"
+                                value=""
+                                id="flexCheckDefault"
+                                onClick={changeAvailabilityProduct}
+                            />
+                        )}
+
+                        <label
+                            className="form-check-label"
+                            htmlFor="flexCheckDefault"
+                        >
+                            Disponible
+                        </label>
+                    </div>
+                </li>
                 <li className="list-group-item">
                     <h5>Precio actual: ${product.price}</h5>
                     <div className="col-lg-3 col-md-4 col-sm-10">
