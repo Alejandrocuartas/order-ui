@@ -8,9 +8,9 @@ const PostTable = ({ isOpen, onClose, setTables, company }) => {
         const formdata = new FormData(e.target);
         setLoading(true);
         await fetch(
-            `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://order-services-ale.herokuapp.com/orders/create/${company}/${formdata.get(
-                "number"
-            )}`
+            `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${
+                process.env.API
+            }/orders/create/${company}/${formdata.get("number")}`
         )
             .then((res) => {
                 if (!res.ok) {
